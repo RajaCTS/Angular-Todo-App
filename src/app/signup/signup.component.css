@@ -1,0 +1,76 @@
+.bg-black{
+    background-color: black
+}
+.bg-white{
+    background-color: #ffffff
+}
+
+input.ng-invalid.ng-touched{
+  border-color: #dc3545;
+}
+input.ng-invalid.ng-touched + .help-block{
+  color: #dc3545;
+}
+
+.radio-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+  }
+  
+  /* Hide the browser's default radio button */
+  .radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Create a custom radio button */
+  .bg-white .checkmark,.bg-black .checkmark {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    height: 25px;
+    width: 25px;    
+    background-color: #eeeeee;
+    border:1px solid #2196F3;
+    border-radius: 50%;
+  }
+  .bg-black .checkmark{
+      border:1px solid #ffc107;
+      background-color: #000000;
+  }
+  
+  /* When the radio button is checked, add a blue background */
+  .bg-white .radio-container input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  .bg-black .radio-container input:checked ~ .checkmark {
+    background-color: #ffc107;
+  }
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the indicator (dot/circle) when checked */
+  .radio-container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the indicator (dot/circle) */
+  .bg-black .radio-container .checkmark:after,.bg-white .radio-container .checkmark:after {
+      top: 6px;
+      left: 6px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #000000;
+  }
+  .bg-white .radio-container .checkmark:after {
+      background-color: white
+  }

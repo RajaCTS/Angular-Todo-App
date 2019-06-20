@@ -1,0 +1,12 @@
+.bg-black{
+    background-color: black
+}
+.bg-white{
+    background-color: #ffffff
+}
+input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched{
+    border-color: #dc3545;
+}
+input.ng-invalid.ng-touched + .help-block, textarea.ng-invalid.ng-touched + .help-block{
+    color: #dc3545;
+}

@@ -1,0 +1,12 @@
+<nav class="navbar navbar-expand-md" [ngClass]="{'bg-warning': appTheme == 'dark','bg-info': appTheme == 'light'}">
+  <a class="navbar-brand">Angular Accountablity</a>
+  <div class="navbar-nav">
+    <a class="nav-item nav-link" (click)="changeTheme()">{{appTheme}} Theme</a>
+  </div>
+  <div class="ml-auto">
+    <ul class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/signup" *ngIf="logginStatus == 'Login'">Sign Up</a>
+        <a class="nav-item nav-link" (click)="logBasedOnStatus()">{{logginStatus}}</a>
+    </ul>    
+  </div>
+</nav>

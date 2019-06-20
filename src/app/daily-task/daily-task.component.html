@@ -1,0 +1,27 @@
+<div class="col-sm-12">
+  <div class="d-flex justify-content-center mt-2">
+    <button class="btn btn-primary" (click)="createNewTodo()">Create New Task</button>
+  </div>
+</div>
+<div *ngFor="let task of tasklist; let i = index" class="mt-2">
+  <div [ngClass]="{'clear-both': i%4==0}">
+    <div class="col-sm-3 float-left">
+      <div class="card mb-2" [@dailyTaskAnimate]="in"
+        [ngClass]="{'border-info bg-white':appTheme == 'light' || appTheme == undefined,'border-warning bg-black':appTheme == 'dark'}">
+        <div class="card-header"
+          [ngClass]="{'bg-info':appTheme == 'light' || appTheme == undefined,'bg-warning':appTheme == 'dark'}">
+          <p class="float-left mb-0">{{task.title}}</p>
+          <p class="float-right mb-0" (click)="editDailyTask(task)"><i class="fas fa-edit"></i></p>
+          <p class="float-right mb-0 mr-4" (click)="deleteTask(task)"><i class="fas fa-trash-alt"></i></p>
+        </div>
+        <div class="card-body" [ngClass]="{'text-white':appTheme == 'dark'}">
+          {{task.desc}}
+        </div>
+        <div class="card-footer" [ngClass]="{'text-white':appTheme == 'dark'}">
+          <p class="float-left"><span class="text-bold">Owner:</span> {{task.doneBy}}</p>
+          <p class="float-right"><span class="text- bold">Created on:</span> {{task.createdOn | date}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

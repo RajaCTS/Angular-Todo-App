@@ -1,0 +1,27 @@
+<div class="card" [@popupAnimate]="in"
+  [ngClass]="{'border-info bg-white':appTheme == 'light' || appTheme == undefined,'border-warning bg-black':appTheme == 'dark'}">
+  <div class="card-header"
+    [ngClass]="{'bg-info':appTheme == 'light' || appTheme == undefined,'bg-warning':appTheme == 'dark'}">
+    Todo Task
+  </div>
+  <div class="card-body" [ngClass]="{'text-white':appTheme == 'dark'}">
+    <form #todoForm="ngForm">
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" class="form-control" [(ngModel)]="todoTask.title" name="title" 
+          [ngClass]="{'bg-white': appTheme == 'light', 'bg-black text-white': appTheme == 'dark'}" required>
+        <span class="help-block" *ngIf="todoTask.title && !todoTask.title.valid && todoTask.title.touched">This field is mandatory</span>
+      </div>
+      <div class="form-group">
+        <label>Desc</label>
+        <textarea class="form-control" cols="30" rows="5" [(ngModel)]="todoTask.desc" name="desc"
+        [ngClass]="{'bg-white': appTheme == 'light', 'bg-black text-white': appTheme == 'dark'}" required></textarea>
+        <span class="help-block" *ngIf="todoTask.desc && !todoTask.desc.valid && todoTask.desc.touched">This field is mandatory</span>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-success" *ngIf="!todoTask.userID" [disabled]="!todoForm.valid" (click)="saveTodo(todoTask)">save</button>
+        <button type="submit" class="btn btn-success" *ngIf="todoTask.userID" [disabled]="!todoForm.valid" (click)="updateTodo(todoTask)">Update</button>
+      </div>
+    </form>
+  </div>
+</div>
