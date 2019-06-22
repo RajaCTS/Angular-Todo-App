@@ -10,6 +10,7 @@ export class LoginService {
   baseURI = "http://localhost:3000";
   logged = new BehaviorSubject('Login');
   looginInfo = this.logged.asObservable();
+  login = new BehaviorSubject({});
 
   constructor(private http: HttpClient, private route: Router) {
     this.isUserLoggedIn();
@@ -18,18 +19,18 @@ export class LoginService {
   loggin(data, navigateURL) {
     if (data) {
       this.http.post(this.baseURI + '/login', data).subscribe((result) => {
-        for (var x in result['data']) {
-          window.sessionStorage.setItem(x, result['data'][x]);
+        for (var x in result) {
+          window.sessionStorage.setItem(x, result[x]);
         }
         this.isUserLoggedIn();
         this.route.navigate([navigateURL]);
       }, (err) => {
-        window.alert(err.error);
+        this.login.next(err);
       })
     }
   }
 
-  signup(data,navigateURL) {
+  signup(data, navigateURL) {
     if (data) {
       this.http.post(this.baseURI + '/newUser', data).subscribe((result) => {
         for (var x in result['data']) {
@@ -38,7 +39,7 @@ export class LoginService {
         this.isUserLoggedIn();
         this.route.navigate([navigateURL]);
       }, (err) => {
-        window.alert(err.error);
+        console.log(err);
       })
 
     }

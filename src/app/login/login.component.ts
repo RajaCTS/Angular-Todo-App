@@ -11,17 +11,32 @@ import { LoginService } from '../services/login.service';
 export class LoginComponent implements OnInit {
 
   appTheme;
-
-  constructor(private themeChangerService: ThemeChangerService, private loggin: LoginService, private route:Router) { }
+  loginConnect;
+  errMsg;
+  constructor(private themeChangerService: ThemeChangerService, private loggin: LoginService, private route: Router) { }
 
   ngOnInit() {
-    this.themeChangerService.themeinfo.subscribe((data) =>{
+    this.themeChangerService.themeinfo.subscribe((data) => {
       this.appTheme = data;
     })
   }
 
-  login(formData){
-      this.loggin.loggin(formData.value,'/dailyTask');
+  resetError(formData) {
+    this.loginConnect = false;
+    formData.form.controls['emailID'].setErrors(null);
+    formData.form.controls['password'].setErrors(null);
+  }
+
+  login(formData) {
+    this.loggin.loggin(formData.value, '/dailyTask');
+    this.loggin.login.subscribe((data) => {
+      if (data.hasOwnProperty('error')) {
+        this.loginConnect = true;
+        this.errMsg = data['error']['errmsg']
+        formData.form.controls['emailID'].setErrors({ 'incorrect': true });
+        formData.form.controls['password'].setErrors({ 'incorrect': true });
+      }
+    })
   }
 
 }

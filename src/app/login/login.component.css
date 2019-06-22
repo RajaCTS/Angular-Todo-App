@@ -13,3 +13,6 @@ input.ng-invalid.ng-touched + .help-block{
 input.ng-valid{
     border-color: #28a745 
 }
+.help-block{
+    color: #dc3545;
+}

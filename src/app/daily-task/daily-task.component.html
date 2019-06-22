@@ -11,8 +11,10 @@
         <div class="card-header"
           [ngClass]="{'bg-info':appTheme == 'light' || appTheme == undefined,'bg-warning':appTheme == 'dark'}">
           <p class="float-left mb-0">{{task.title}}</p>
-          <p class="float-right mb-0" (click)="editDailyTask(task)"><i class="fas fa-edit"></i></p>
-          <p class="float-right mb-0 mr-4" (click)="deleteTask(task)"><i class="fas fa-trash-alt"></i></p>
+          <div class="float-right" *ngIf="task.userID == loggedInUser">
+            <p class="float-right mb-0" (click)="editDailyTask(task)"><i class="fas fa-edit"></i></p>
+            <p class="float-right mb-0 mr-4" (click)="deleteTask(task)"><i class="fas fa-trash-alt"></i></p>
+          </div>
         </div>
         <div class="card-body" [ngClass]="{'text-white':appTheme == 'dark'}">
           {{task.desc}}
