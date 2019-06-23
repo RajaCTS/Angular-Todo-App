@@ -33,8 +33,8 @@ export class LoginService {
   signup(data, navigateURL) {
     if (data) {
       this.http.post(this.baseURI + '/newUser', data).subscribe((result) => {
-        for (var x in result['data']) {
-          window.sessionStorage.setItem(x, result['data'][x]);
+        for (var x in result) {
+          window.sessionStorage.setItem(x, result[x]);
         }
         this.isUserLoggedIn();
         this.route.navigate([navigateURL]);
