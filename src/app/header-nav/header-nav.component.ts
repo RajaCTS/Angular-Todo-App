@@ -12,7 +12,7 @@ export class HeaderNavComponent implements OnInit, DoCheck {
 
   logginStatus:string = "Login";
   constructor(private ChangeThemeService: ThemeChangerService,private loginService: LoginService, private route: Router) { }
-  
+  loggedInUser: string;
   appTheme;
   ngOnInit() {
     this.ChangeThemeService.themeinfo.subscribe((data)=>{
@@ -29,6 +29,10 @@ export class HeaderNavComponent implements OnInit, DoCheck {
     }
   }
 
+  navigateToURL(urlPath){
+    this.route.navigate([urlPath])
+  }
+
   changeTheme = () =>{
     this.ChangeThemeService.themeChage();
   }
@@ -36,6 +40,7 @@ export class HeaderNavComponent implements OnInit, DoCheck {
   ngDoCheck(){
     this.loginService.logged.subscribe((data)=>{
       this.logginStatus = data;
+      this.loggedInUser = window.sessionStorage.getItem('userName')
     })
   }
 

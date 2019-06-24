@@ -17,6 +17,7 @@ import { SignupComponent } from './signup/signup.component';
 import { ModelServiceService } from './services/model-service.service';
 import { ModalContentComponent } from './modal-content/modal-content.component';
 import { todoService } from './services/todo-service.service';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { todoService } from './services/todo-service.service';
     LoginComponent,
     PageNotFoundComponent,
     SignupComponent,
-    ModalContentComponent
+    ModalContentComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

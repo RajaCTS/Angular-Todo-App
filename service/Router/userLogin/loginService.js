@@ -17,13 +17,29 @@ var userService = {
     updateUser: (req) => {
         return User.findOneAndUpdate(req.params.userID, req.body)
     },
+    getUser: (req) => {
+        var reqParam = _.pick(req.params,['userID'])
+        return User.find(reqParam).then((resullt)=>{
+            if (!result.length) {
+                var err = {
+                    errmsg: "Invalid User ID"
+                }
+                throw err
+            } else {
+                var resultData = _.pick(result[0],['emailID','userID', 'userName','gender'])
+                return resultData
+            }
+        }).catch((err) => {
+            return err
+        })
+    },
     login: (req) => {
         var reqParam = _.pick(req.body, ['emailID', 'password']);
         var newUser = new User(reqParam)
         return User.find(reqParam).then((result) => {
             if (!result.length) {
                 var err = {
-                    errmsg: "Invalid EmailID and Password"
+                    errmsg: "Invalid EmailID / Password Pair"
                 }
                 throw err
             } else {

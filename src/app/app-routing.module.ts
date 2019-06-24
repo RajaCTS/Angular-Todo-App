@@ -4,13 +4,15 @@ import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DailyTaskComponent } from './daily-task/daily-task.component';
 import { SignupComponent } from './signup/signup.component';
-import { AuthGuard } from './guard/auth.guard'
+import { AuthGuard } from './guard/auth.guard';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
     { path: "", redirectTo: '/dailyTask', pathMatch: 'full'},
     { path: "userLogin", component: LoginComponent },
     { path: "dailyTask", component: DailyTaskComponent, runGuardsAndResolvers: 'always', canActivate: [AuthGuard] },
-    { path: "signup", component: SignupComponent },
+    { path: "signUp", component: SignupComponent },
+    { path: "profile", component: ProfileComponent},
     { path: '**', component: PageNotFoundComponent, data: { message: "Page not Found" } }
 ];
 

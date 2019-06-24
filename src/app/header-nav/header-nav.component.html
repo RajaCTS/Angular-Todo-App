@@ -1,12 +1,22 @@
 <nav class="navbar navbar-expand-md" [ngClass]="{'bg-warning': appTheme == 'dark','bg-info': appTheme == 'light'}">
-  <a class="navbar-brand">Angular Accountablity</a>
+  <a class="navbar-brand" (click)="navigateToURL('/dailyTask')">Angular Accountablity</a>
   <div class="navbar-nav">
     <a class="nav-item nav-link" (click)="changeTheme()">{{appTheme}} Theme</a>
   </div>
   <div class="ml-auto">
     <ul class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/signup" *ngIf="logginStatus == 'Login'">Sign Up</a>
-        <a class="nav-item nav-link" (click)="logBasedOnStatus()">{{logginStatus}}</a>
-    </ul>    
+      <a class="nav-item nav-link" (click)="navigateToURL('/signUp')" *ngIf="logginStatus == 'Login'">Sign Up</a>
+      <a class="nav-item nav-link" (click)="logBasedOnStatus()" *ngIf="logginStatus == 'Login'">{{logginStatus}}</a>
+      <li class="nav-item dropdown" *ngIf="logginStatus == 'Logout'">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
+          {{loggedInUser}}
+        </a>
+        <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" [ngClass]="{'bg-warning': appTheme == 'dark','bg-info': appTheme == 'light'}">
+          <a class="dropdown-item" [ngClass]="{'bg-warning': appTheme == 'dark','bg-info': appTheme == 'light'}" (click)="navigateToURL('/profile')">Edit Profile</a>
+          <a class="dropdown-item" [ngClass]="{'bg-warning': appTheme == 'dark','bg-info': appTheme == 'light'}" (click)="navigateToURL('/profile')">Change Password</a>
+          <a class="dropdown-item" [ngClass]="{'bg-warning': appTheme == 'dark','bg-info': appTheme == 'light'}" (click)="logBasedOnStatus()">Logout</a>
+        </div>
+      </li>
+    </ul>
   </div>
 </nav>

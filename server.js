@@ -73,12 +73,19 @@ app.post('/newUser', (req, res) => {
     })
 })
 
+app.get('/userDetails', (req, res) => {
+    userService.getUser(req).then((result) => {
+        var resutlData = _.pick(result, ['userName', 'userID', 'emailID','gender']);
+        res.send(resutlData);
+    })
+})
+
 app.post('/login', (req, res) => {
     userService.login(req).then((result) => {
         if (result.errmsg) {
             res.status(401).send(result)
         } else {
-            var resutlData = _.pick(result, ['userName', 'userID', 'emailID','msg']);
+            var resutlData = _.pick(result, ['userName', 'userID', 'emailID', 'msg']);
             res.header('autherization', result['x_auth']).send(resutlData);
         }
     })

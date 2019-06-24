@@ -11,6 +11,7 @@ export class LoginService {
   logged = new BehaviorSubject('Login');
   looginInfo = this.logged.asObservable();
   login = new BehaviorSubject({});
+  
 
   constructor(private http: HttpClient, private route: Router) {
     this.isUserLoggedIn();
@@ -24,6 +25,7 @@ export class LoginService {
         }
         this.isUserLoggedIn();
         this.route.navigate([navigateURL]);
+        this.login.next(result);
       }, (err) => {
         this.login.next(err);
       })
@@ -38,10 +40,17 @@ export class LoginService {
         }
         this.isUserLoggedIn();
         this.route.navigate([navigateURL]);
+        this.login.next(result);
       }, (err) => {
-        console.log(err);
+        this.login.next(err);
       })
 
+    }
+  }
+
+  getUserDetails(data){
+    if(data){
+      return this.http.get(this.baseURI + '/userDetails',{params:{'userID':data}})
     }
   }
 

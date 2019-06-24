@@ -13,3 +13,9 @@
 .show{
     display: block
 }
+.bg-black{
+    background-color: black
+}
+.bg-white{
+    background-color: #ffffff
+}
