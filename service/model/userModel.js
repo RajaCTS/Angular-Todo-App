@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const _ = require('lodash');
 const jwt = require('jsonwebtoken');
+const uuid1 = require('uuid/v1');
 const uuid3 = require('uuid/v3');
 
 var UserSchema = new mongoose.Schema({
@@ -45,9 +46,10 @@ var UserSchema = new mongoose.Schema({
     }
 })
 
-UserSchema.method.generateUserID = function(){
+UserSchema.methods.generateUserID = function(){
     var user = this;
-    return uuid3(user.userName);     
+    var NAME_SPACE = uuid1();
+    return uuid3(user.userName,NAME_SPACE);    
 }
 
 UserSchema.methods.generateToken = function () {
