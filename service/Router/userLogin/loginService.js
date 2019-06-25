@@ -15,11 +15,16 @@ var userService = {
         })
     },
     updateUser: (req) => {
-        return User.findOneAndUpdate(req.params.userID, req.body)
+        var reqParam = _.pick(req.query,['userID'])
+        return User.findOneAndUpdate(reqParam, req.body).then((result)=>{
+            if(result){
+                return result
+            }
+        })
     },
     getUser: (req) => {
-        var reqParam = _.pick(req.params,['userID'])
-        return User.find(reqParam).then((resullt)=>{
+        var reqParam = _.pick(req.query,['userID'])
+        return User.find(reqParam).then((result)=>{
             if (!result.length) {
                 var err = {
                     errmsg: "Invalid User ID"

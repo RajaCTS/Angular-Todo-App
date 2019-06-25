@@ -54,6 +54,12 @@ export class LoginService {
     }
   }
 
+  updateUserDetails(param,data){
+    if(data){
+      return this.http.put(this.baseURI + '/userDetails',data,{params:{userID:param}})
+    }
+  }
+
   loggOut() {
     window.sessionStorage.clear();
     this.isUserLoggedIn();

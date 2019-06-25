@@ -18,6 +18,8 @@ import { ModelServiceService } from './services/model-service.service';
 import { ModalContentComponent } from './modal-content/modal-content.component';
 import { todoService } from './services/todo-service.service';
 import { ProfileComponent } from './profile/profile.component';
+import { AdditionalComponent } from './form/additional/additional.component';
+import { ProfileFormComponent } from './form/profile-form/profile-form.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { ProfileComponent } from './profile/profile.component';
     PageNotFoundComponent,
     SignupComponent,
     ModalContentComponent,
-    ProfileComponent
+    ProfileComponent,
+    AdditionalComponent,
+    ProfileFormComponent
   ],
   imports: [
     BrowserModule,

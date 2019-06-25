@@ -1,11 +1,11 @@
-<div class="col-sm-12">
+<div class="col-lg-12">
   <div class="d-flex justify-content-center mt-2">
     <button class="btn btn-primary" (click)="createNewTodo()">Create New Task</button>
   </div>
 </div>
 <div *ngFor="let task of tasklist; let i = index" class="mt-2">
   <div [ngClass]="{'clear-both': i%4==0}">
-    <div class="col-sm-3 float-left">
+    <div class="col-lg-3 float-left">
       <div class="card mb-2" [@dailyTaskAnimate]="in"
         [ngClass]="{'border-info bg-white':appTheme == 'light' || appTheme == undefined,'border-warning bg-black':appTheme == 'dark'}">
         <div class="card-header"

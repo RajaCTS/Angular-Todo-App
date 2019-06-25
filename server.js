@@ -80,6 +80,13 @@ app.get('/userDetails', (req, res) => {
     })
 })
 
+app.put('/userDetails', (req, res) => {
+    userService.updateUser(req).then((result) => {
+        var resutlData = _.pick(result, ['userName', 'userID', 'emailID','gender']);
+        res.send(resutlData);
+    })
+})
+
 app.post('/login', (req, res) => {
     userService.login(req).then((result) => {
         if (result.errmsg) {

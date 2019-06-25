@@ -43,6 +43,23 @@ var UserSchema = new mongoose.Schema({
     updatedOn: {
         type: Date,
         default: new Date()
+    },
+    addressDetail:{
+        addressLine1: {
+            type: String
+        },
+        addressLine2:{
+            type: String
+        },
+        city:{
+            type: String
+        },
+        state:{
+            type: String
+        },
+        pincode:{
+            type: String
+        }
     }
 })
 
