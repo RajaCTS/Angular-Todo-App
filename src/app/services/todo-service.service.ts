@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -9,26 +9,28 @@ export class todoService {
     }
     baseURI = "http://localhost:3000";
 
+    headers= new HttpHeaders().append('Authorization','my-auth-token');
+
     getTodos = (user) => {
         return this.http.get(this.baseURI + "/todos", {
             params: {
                 userID: user.userID
-            }
+            },
+            headers: this.headers
         })
     }
 
-    newTodo = (request) =>{
-        return this.http.post(this.baseURI+"/todos",request);
+    newTodo = (request) => {
+        return this.http.post(this.baseURI + "/todos", request, {headers:this.headers});
     }
 
-    updateTodo = (request) =>{
+    updateTodo = (request) => {
         delete request._id;
-        return this.http.put(this.baseURI+"/todos",request,{params:{taskID:request.taskID}});
+        return this.http.put(this.baseURI + "/todos", request, {params: { taskID: request.taskID },headers: this.headers});
     }
 
-    deleteTodo = (request) =>{
-        delete request._id;
-        return this.http.delete(this.baseURI+"/todos",{params:{taskID:request.taskID}});
+    deleteTodo = (request) => {
+        return this.http.delete(this.baseURI + "/todos", {params: { taskID: request.taskID },headers: this.headers});
     }
 
 }

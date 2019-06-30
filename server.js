@@ -11,19 +11,24 @@ const app = express();
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
     res.header("Access-Control-Allow-Methods", "*");
-    next();
-});
-
-app.use((req,res,next)=>{
-    var verified = jwt.verify(req.header.autherization,"way is out");
-    if(verifiedToken){
-        console.log(verifiedToken);
-    }else{
-        res.status(401).send('User Unauthorized');
+    try {
+        if (req.path != '/newUser' && req.path != '/login') {
+            console.log(req.headers)
+            var verifiedToken = jwt.verify(req.headers.Authorization, "way is out")
+            if (verifiedToken) {
+                next()
+            } else {
+                throw err;
+            }
+        } else {
+            next();
+        }
+    } catch (err) {
+        res.status(401).send({ err: "Unautherized" })
     }
-})
+});
 
 app.get('/todos', (req, res) => {
     todoService.getTodoList().then((result) => {
@@ -75,8 +80,8 @@ app.post('/newUser', (req, res) => {
             var resultData = { errmsg: 'EmailID is already available' }
             res.status(400).send(resultData)
         } else {
-            var resutlData = _.pick(result, ['userName', 'userID', 'emailID']);
-            res.header('autherization', result['x_auth']).send(resutlData);
+            var resutlData = _.pick(result, ['userName', 'userID', 'Authorization']);
+            res.send(resutlData);
         }
 
     })
@@ -84,14 +89,14 @@ app.post('/newUser', (req, res) => {
 
 app.get('/userDetails', (req, res) => {
     userService.getUser(req).then((result) => {
-        var resutlData = _.pick(result, ['userName', 'userID', 'emailID','gender']);
+        var resutlData = _.pick(result, ['userName', 'userID', 'emailID', 'gender']);
         res.send(resutlData);
     })
 })
 
 app.put('/userDetails', (req, res) => {
     userService.updateUser(req).then((result) => {
-        var resutlData = _.pick(result, ['userName', 'userID', 'emailID','gender']);
+        var resutlData = _.pick(result, ['userName', 'userID', 'emailID', 'gender']);
         res.send(resutlData);
     })
 })
@@ -101,8 +106,8 @@ app.post('/login', (req, res) => {
         if (result.errmsg) {
             res.status(401).send(result)
         } else {
-            var resutlData = _.pick(result, ['userName', 'userID', 'emailID', 'msg']);
-            res.header('autherization', result['x_auth']).send(resutlData);
+            var resutlData = _.pick(result, ['userName', 'userID', 'Authorization']);
+            res.send(resutlData);
         }
     })
 })
