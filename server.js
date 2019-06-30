@@ -16,6 +16,15 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use((req,res,next)=>{
+    var verified = jwt.verify(req.header.autherization,"way is out");
+    if(verifiedToken){
+        console.log(verifiedToken);
+    }else{
+        res.status(401).send('User Unauthorized');
+    }
+})
+
 app.get('/todos', (req, res) => {
     todoService.getTodoList().then((result) => {
         res.send({

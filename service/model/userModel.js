@@ -71,7 +71,7 @@ UserSchema.methods.generateUserID = function(){
 
 UserSchema.methods.generateToken = function () {
     var user = this;
-    var token = jwt.sign({ _id: user._id }, user.password);
+    var token = jwt.sign({ _id: user._id }, "way is out");
     return token;    
 }
 
