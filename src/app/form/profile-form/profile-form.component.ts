@@ -9,26 +9,29 @@ import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@ang
 })
 export class ProfileFormComponent implements OnInit {
 
-  profileForm:FormGroup;
-  userID:any =  window.sessionStorage.getItem('userID');
+  profileForm: FormGroup;
+  userID: any = window.sessionStorage.getItem('userID');
 
   constructor(private loginService: LoginService) { }
 
   ngOnInit() {
     this.profileForm = new FormGroup({
-        firstName: new FormControl(''),
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
+      contactNumber: new FormControl(''),
+      emailID: new FormControl(''),
+      dateOfBirth: new FormControl('')
+    })
+
+    this.loginService.getUserDetails(this.userID).subscribe((data) => {
+      this.profileForm = new FormGroup({
+        firstName: new FormControl(data['userName']),
         lastName: new FormControl(''),
         contactNumber: new FormControl(''),
-        emailID: new FormControl(''),        
-        dateOfBirth: new FormControl('')
+        dateOfBirth: new FormControl(''),
+        emailID: new FormControl(data['emailID'])
       })
-
-      this.loginService.getUserDetails(this.userID).subscribe((data)=>{
-        this.profileForm = new FormGroup({
-          firstName: new FormControl(data['userName']),
-          emailID: new FormControl(data['emailID'])
-        })
-      })
+    })
   }
 
   updateProfile() {

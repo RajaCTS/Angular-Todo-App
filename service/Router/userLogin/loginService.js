@@ -8,7 +8,7 @@ var userService = {
         newUser.userID = newUser.generateUserID()
         return newUser.save().then((result) => {
             var resultData = _.pick(result, ['emailID', 'userID', 'userName']);
-            resultData.x_auth = newUser.generateToken()
+            resultData.Authorization = newUser.generateToken()
             return resultData
         }).catch((err) => {
             return err
@@ -49,7 +49,7 @@ var userService = {
                 throw err
             } else {
                 var resultData = _.pick(result[0],['emailID','userID', 'userName'])
-                resultData.x_auth = newUser.generateToken();    
+                resultData.Authorization = newUser.generateToken();    
                 resultData.msg = "Successfully Logged In";
                 return resultData
             }

@@ -66,7 +66,7 @@ export class LoginService {
   }
 
   isUserLoggedIn() {
-    var session = window.sessionStorage.getItem('x_auth');
+    var session = window.sessionStorage.getItem('Authorization');
     var loginStatus: string;
     this.looginInfo.subscribe((data) => {
       if (!session) {
