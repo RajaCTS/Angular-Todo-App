@@ -9,30 +9,25 @@ export class todoService {
     }
     baseURI = "http://localhost:3000";
 
-    headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.getAuthToken()
-    });
-
     getAuthToken() {
         return window.sessionStorage.getItem('Authorization');
     }
 
     getTodos = (user) => {
-        return this.http.get(this.baseURI + "/todos", { params: { userID: user.userID }, headers: this.headers})
+        return this.http.get(this.baseURI + "/todos", { params: { userID: user.userID }})
     }
 
     newTodo = (request) => {
-        return this.http.post(this.baseURI + "/todos", request, {  headers: this.headers })
+        return this.http.post(this.baseURI + "/todos", request)
     }
 
     updateTodo = (request) => {
         delete request._id;
-        return this.http.put(this.baseURI + "/todos", request, { params: { taskID: request.taskID },  headers: this.headers });
+        return this.http.put(this.baseURI + "/todos", request, { params: { taskID: request.taskID }});
     }
 
     deleteTodo = (request) => {
-        return this.http.delete(this.baseURI + "/todos", { params: { taskID: request.taskID },  headers: this.headers });
+        return this.http.delete(this.baseURI + "/todos", { params: { taskID: request.taskID }});
     }
 
 }

@@ -62,7 +62,7 @@ export class DailyTaskComponent {
   }
 
   createNewTodo() {
-    this.modal.open(ModalContentComponent);
+    this.modal.open(ModalContentComponent);    
   }
 
   editDailyTask(task) {
@@ -72,9 +72,14 @@ export class DailyTaskComponent {
   }
 
   deleteTask(task) {
-    this.todoService.deleteTodo(task).subscribe((data) => {
-      this.getTodos();
+    for (var x in this.tasklist) {
+      if (this.tasklist[x]['taskID'] == task.taskID) {
+        this.tasklist.splice(x, 1);
+      }
+    }
+    this.todoService.deleteTodo(task).subscribe((data)=>{
+      console.log(data);
     })
   }
-  
+
 }

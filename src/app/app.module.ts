@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import { todoService } from './services/todo-service.service';
 import { ProfileComponent } from './profile/profile.component';
 import { AdditionalComponent } from './form/additional/additional.component';
 import { ProfileFormComponent } from './form/profile-form/profile-form.component';
+import { AuthInterceptor} from './services/auth.interceptor'
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { ProfileFormComponent } from './form/profile-form/profile-form.component
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [ThemeChangerService, LoginService, ModelServiceService, todoService],
+  providers: [ThemeChangerService, LoginService, ModelServiceService, todoService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent],
   entryComponents: [ModalContentComponent]
 })

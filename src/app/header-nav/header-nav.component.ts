@@ -25,7 +25,7 @@ export class HeaderNavComponent implements OnInit, DoCheck {
       this.route.navigate(['/userLogin']);
     }else{
       this.loginService.loggOut();
-      this.route.navigate(['/'])
+      this.route.navigate(['/userLogin'])
     }
   }
 

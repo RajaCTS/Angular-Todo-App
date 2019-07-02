@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router'
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
@@ -32,7 +32,7 @@ export class ModalContentComponent implements OnInit {
 
   @Input() private todoTask;
 
-  constructor(private todoService: todoService, private modal: NgbModal, private route: Router) { }
+  constructor(private todoService: todoService, private modal: NgbActiveModal, private route: Router) { }
 
   ngOnInit() {
     if(!this.todoTask){
@@ -44,15 +44,15 @@ export class ModalContentComponent implements OnInit {
     value.userID = window.sessionStorage.getItem('userID');
     value.doneBy = window.sessionStorage.getItem('userName');
     this.todoService.newTodo(value).subscribe((response)=>{
-      this.modal.dismissAll();
-      this.route.navigate(['/dailyTask']);
+      this.route.navigate(['/dailyTask']);      
+      this.modal.close();
     })
   }
 
   updateTodo(value){
     this.todoService.updateTodo(value).subscribe((response)=>{
-      this.modal.dismissAll();
       this.route.navigate(['/dailyTask']);
+      this.modal.close();
     })
   }
 
