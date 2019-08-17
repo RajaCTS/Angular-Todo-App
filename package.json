@@ -8,8 +8,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "node": "nodemon server.js",
-    "start-mean": "concurrently --kill-others \"npm run start\" \"npm run node\""
+    "server": "nodemon server.js",
+    "client": "ng serve -o",
+    "start-mean": "concurrently --kill-others \"npm run client\" \"npm run server\""
   },
   "private": true,
   "dependencies": {
